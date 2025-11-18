@@ -205,6 +205,7 @@ export default function Order() {
                         value="kucuk"
                         checked={form.size === "kucuk"}
                         onChange={handleChange}
+                        data-cy="size-small"
                       />
                       <Label check>Küçük</Label>
                     </FormGroup>
@@ -215,6 +216,7 @@ export default function Order() {
                         value="orta"
                         checked={form.size === "orta"}
                         onChange={handleChange}
+                        data-cy="size-medium"
                       />
                       <Label check>Orta</Label>
                     </FormGroup>
@@ -225,6 +227,7 @@ export default function Order() {
                         value="buyuk"
                         checked={form.size === "buyuk"}
                         onChange={handleChange}
+                        data-cy="size-large"
                       />
                       <Label check>Büyük</Label>
                     </FormGroup>
@@ -244,6 +247,7 @@ export default function Order() {
                     value={form.dough}
                     onChange={handleChange}
                     className="select-input"
+                    data-cy="dough-select"
                   >
                     <option value="">Hamur Kalınlığı</option>
                     <option value="ince">İnce</option>
@@ -276,6 +280,7 @@ export default function Order() {
                         disabled={
                           !toppings.includes(topping) && toppings.length >= 10
                         }
+                        data-cy="topping-option"
                       />
                       <Label check>{topping}</Label>
                     </FormGroup>
@@ -295,6 +300,7 @@ export default function Order() {
                   value={form.name}
                   onChange={handleChange}
                   className="isim-input"
+                  data-cy="order-name"
                 />
                 {errors.name && (
                   <p className="error-text">Lütfen ismini yaz!</p>
@@ -313,6 +319,7 @@ export default function Order() {
                   value={form.notes}
                   onChange={handleChange}
                   className="textarea-input"
+                  data-cy="order-notes"
                 />
               </FormGroup>
             </Form>
@@ -352,6 +359,7 @@ export default function Order() {
                   type="submit"
                   onClick={handleSubmit}
                   disabled={!isValid}
+                  data-cy="order-submit"
                 >
                   SİPARİŞ VER
                 </Button>
