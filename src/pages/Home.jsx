@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-
+import Hero from "./Hero";
 
 export default function Home() {
   return (
     <>
-      <h1>TEKNOLOJİK YEMEKLER</h1>
-      <Link to="/order">Sipariş Ver</Link>
+      <Hero />
     </>
   );
 }

@@ -1,0 +1,25 @@
+.success-section {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-red);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.success-logo {
+  width: 350px;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.success-title {
+  font-size: 48px;
+  font-weight: 100;
+  letter-spacing: 3px;
+}
