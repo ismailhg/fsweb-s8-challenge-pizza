@@ -42,13 +42,15 @@ const initialForm = {
 const basePrice = 85.5;
 const toppingPrice = 5;
 
-export default function Order() {
+export default function Order({ setOrderResult }) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState(initialForm);
   const [quantity, setQuantity] = useState(1);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const toppings = form.toppings || [];
 
@@ -117,16 +119,22 @@ export default function Order() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!isValid) return;
+    if (!isValid || isSubmitting) return;
+
+    setApiError("");
+    setIsSubmitting(true);
+
+    const payload = {
+      ...form,
+      quantity,
+      totalPrice,
+      selectionsPrice,
+    };
 
     try {
       const response = await axios.post(
         "https://reqres.in/api/users",
-        {
-          ...form,
-          quantity,
-          totalPrice,
-        },
+        payload,
         {
           headers: {
             "x-api-key": "reqres-free-v1",
@@ -134,17 +142,35 @@ export default function Order() {
         }
       );
 
-      console.log("API response:", response.data);
+      setOrderResult({
+        form,
+        quantity,
+        totalPrice,
+        selectionsPrice,
+        apiResponse: response.data,
+      });
 
       setForm(initialForm);
       setQuantity(1);
       navigate("/success");
-    } catch (err) {
+    } catch (error) {
       console.error(
         "API error:",
-        err.response?.status,
-        err.response?.data || err
+        error.response?.status,
+        error.response?.data || error
       );
+
+      if (!error.response) {
+        setApiError(
+          "İnternet bağlantınızda bir sorun var. Lütfen tekrar deneyin."
+        );
+      } else {
+        setApiError(
+          "Sipariş gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -353,7 +379,11 @@ export default function Order() {
                     </div>
                   </CardBody>
                 </Card>
-
+                {apiError && (
+                  <p className="error-text" style={{ marginTop: "10px" }}>
+                    {apiError}
+                  </p>
+                )}
                 <Button
                   className="submit-btn"
                   type="submit"
