@@ -1,6 +1,6 @@
 import { Container, Row, Col, Card, CardBody } from "reactstrap";
 import "./success.css";
-import Footer from "./Footer";
+import Footer from "./components/Footer";
 
 export default function Success({ orderResult }) {
   if (!orderResult) {
