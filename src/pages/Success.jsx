@@ -1,5 +1,6 @@
 import { Container, Row, Col, Card, CardBody } from "reactstrap";
 import "./success.css";
+import Footer from "./Footer";
 
 export default function Success({ orderResult }) {
   if (!orderResult) {
@@ -39,7 +40,7 @@ export default function Success({ orderResult }) {
               src="/images/iteration-1-images/logo.svg"
             />
             <h3 className="success-subtitle">lezzetin yolda</h3>
-            <h1 className="success-title">SİPARİŞ ALINDI!</h1>
+            <h1 className="success-title">SİPARİŞ ALINDI</h1>
             <div className="success-divider"></div>
           </Col>
         </Row>
@@ -87,6 +88,7 @@ export default function Success({ orderResult }) {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </section>
   );
 }

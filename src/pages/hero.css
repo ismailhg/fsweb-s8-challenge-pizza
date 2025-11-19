@@ -27,6 +27,7 @@
 
 .hero-btn {
   background-color: var(--color-yellow);
+  color: black;
   border: none;
   font-weight: bold;
   padding: 12px 48px;

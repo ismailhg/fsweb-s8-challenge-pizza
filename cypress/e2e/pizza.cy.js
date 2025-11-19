@@ -41,7 +41,24 @@ describe("Pizza Sipariş Formu Testi", () => {
     cy.get('[data-cy="order-submit"]').click();
 
     cy.url().should("include", "/success");
-    cy.contains("TEBRİKLER").should("be.visible");
-    cy.contains("SİPARİŞİNİZ ALINDI").should("be.visible");
+    cy.contains("SİPARİŞ ALINDI").should("be.visible");
+  });
+
+  it("pizza bilgileri görünüyor mu", () => {
+    cy.get('[data-cy="order-name"]').type("deneme");
+
+    cy.get('[data-cy="size-medium"]').check();
+
+    cy.get('[data-cy="dough-select"]').select("Normal");
+
+    cy.get('[data-cy="topping-option"]').eq(0).check();
+
+    cy.get('[data-cy="order-notes"]').type("Lütfen iyi pişmiş olsun");
+
+    cy.get('[data-cy="order-submit"]').click();
+
+    cy.url().should("include", "/success");
+    cy.contains("Boyut: M").should("be.visible");
+    cy.contains("Pepperoni").should("be.visible");
   });
 });
